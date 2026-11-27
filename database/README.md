@@ -26,12 +26,34 @@ Modelagem, estrutura e gerenciamento do banco de dados MySQL da Agenda de Contat
 
 | Pasta | Conteúdo |
 |---|---|
-| `DER/` | Diagrama Entidade-Relacionamento |
-| `DL/` | Diagrama Lógico |
-| `scripts/tabelas/` | Scripts de criação das tabelas |
-| `scripts/dados/` | Scripts de inserção de dados de teste |
-| `scripts/consultas/` | Consultas SQL para manipulação e visualização dos contatos |
+| `DER/` | Diagramas Entidade-Relacionamento |
+| `DL/` | Diagramas Lógicos |
+| `scripts/tabelas/` | Scripts de criação e alteração da tabela |
+| `scripts/dados/` | Scripts de inserção de dados |
+| `scripts/consultas/` | Consultas SQL e seus resultados |
 | `scripts/testes/` | Scripts utilizados nos testes das operações CRUD |
+
+## 📊 Diagramas
+
+### DER — Diagrama Entidade-Relacionamento
+
+**Versão 1:**
+
+![DER - Versão 1](DER/diagramas/DER_agenda_contatos.png)
+
+**Versão 2 — Atualizada:**
+
+![DER - Versão 2](DER/diagramas/DER_agenda_contatos_2.png)
+
+### DL — Diagrama Lógico
+
+**Versão 1:**
+
+![DL - Versão 1](DL/diagramas/DL_agenda_contatos.png)
+
+**Versão 2 — Atualizada:**
+
+![DL - Versão 2](DL/diagramas/DL_agenda_contatos_2.png)
 
 ## 💾 Banco de dados
 
@@ -43,7 +65,7 @@ A tabela armazena as seguintes informações:
 
 | Campo | Tipo | Descrição |
 |---|---|---|
-| `id_contato` | INT | Identificador do contato |
+| `id_contato` | INT | Identificador do contato (chave primária) |
 | `login_usuario` | VARCHAR(50) | Identifica o proprietário do contato |
 | `nome` | VARCHAR(100) | Nome do contato |
 | `telefone` | VARCHAR(20) | Telefone |
@@ -51,6 +73,9 @@ A tabela armazena as seguintes informações:
 | `aniversario` | DATE | Data de aniversário (opcional) |
 | `observacao` | VARCHAR(255) | Observações (opcional) |
 | `favorito` | BOOLEAN | Indica se o contato é favorito |
+| `categoria` | ENUM | Categoria do contato (opcional) |
+
+**Categorias disponíveis:** Trabalho, Família e Amigos.
 
 ## 🔐 Regras do banco
 
@@ -59,25 +84,20 @@ A tabela armazena as seguintes informações:
 - Os contatos são separados pelo login do proprietário.
 - O banco da Agenda não armazena senhas nem cadastra usuários.
 - O campo `id_contato` é gerado automaticamente.
-- Os campos de e-mail, aniversário e observação são opcionais.
+- Os campos de e-mail, aniversário, observação e categoria são opcionais.
 - O campo `favorito` possui valor padrão `FALSE`.
 
 ## 🔎 Consultas SQL
 
-Os scripts de consulta permitem:
+Foram realizadas diversas consultas para testar o funcionamento do banco de dados.
+
+Entre as principais estão:
 
 - Listar contatos de um usuário.
-- Listar contatos favoritos.
-- Buscar contatos pelo nome.
-- Ordenar contatos alfabeticamente.
-- Contar contatos cadastrados.
-- Listar contatos com e-mail.
-- Listar contatos sem aniversário.
-- Buscar contatos pelo telefone.
-- Listar contatos com observações.
 - Ordenar contatos por aniversário.
-- Buscar por parte do telefone.
-- Exibir favoritos primeiro.
+- Exibir contatos favoritos primeiro.
+
+Os comandos e resultados estão disponíveis na pasta `scripts/consultas/`.
 
 ## 🧪 Testes realizados
 
