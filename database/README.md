@@ -4,23 +4,10 @@
 <img src="https://img.shields.io/badge/🗄️_database-8B5CF6?style=for-the-badge&logoColor=white" alt="database" />
 
 <sub>✦ agenda-contatos • Carroll Studios ✦</sub>
-</div>
 
-<br/>
-
-<div align="center">
-
-Modelagem, estrutura e gerenciamento do banco de dados MySQL da Agenda de Contatos.
-
-<br/>
-
-<img src="https://img.shields.io/badge/📈_DER-8B5CF6?style=flat-square&logoColor=white" alt="DER" />
-<img src="https://img.shields.io/badge/🧩_DL-6D28D9?style=flat-square&logoColor=white" alt="DL" />
-<img src="https://img.shields.io/badge/💾_SQL-EC4899?style=flat-square&logoColor=white" alt="SQL" />
+Modelagem, gerenciamento e integração do banco de dados MySQL da Agenda de Contatos.
 
 </div>
-
-<br/>
 
 ## 🪐 Estrutura
 
@@ -28,32 +15,20 @@ Modelagem, estrutura e gerenciamento do banco de dados MySQL da Agenda de Contat
 |---|---|
 | `DER/` | Diagramas Entidade-Relacionamento |
 | `DL/` | Diagramas Lógicos |
-| `scripts/tabelas/` | Scripts de criação e alteração da tabela |
-| `scripts/dados/` | Scripts de inserção de dados |
-| `scripts/consultas/` | Consultas SQL e seus resultados |
-| `scripts/testes/` | Scripts utilizados nos testes das operações CRUD |
+| `scripts/` | Scripts SQL, consultas e testes |
+| `src/banco/` | Classes Java de conexão com MySQL |
+| `src/banco/dao/` | DAO e testes das operações |
+| `lib/` | Biblioteca MySQL Connector/J |
 
 ## 📊 Diagramas
 
-### DER — Diagrama Entidade-Relacionamento
+**DER — Versão 1 e atualizada**
 
-**Versão 1:**
+![DER](DER/diagramas/DER_agenda_contatos_2.png)
 
-![DER - Versão 1](DER/diagramas/DER_agenda_contatos.png)
+**DL — Versão 1 e atualizada**
 
-**Versão 2 — Atualizada:**
-
-![DER - Versão 2](DER/diagramas/DER_agenda_contatos_2.png)
-
-### DL — Diagrama Lógico
-
-**Versão 1:**
-
-![DL - Versão 1](DL/diagramas/DL_agenda_contatos.png)
-
-**Versão 2 — Atualizada:**
-
-![DL - Versão 2](DL/diagramas/DL_agenda_contatos_2.png)
+![DL](DL/diagramas/DL_agenda_contatos_2.png)
 
 ## 💾 Banco de dados
 
@@ -61,61 +36,46 @@ Modelagem, estrutura e gerenciamento do banco de dados MySQL da Agenda de Contat
 
 **Tabela:** `contato`
 
-A tabela armazena as seguintes informações:
+| Campo | Tipo |
+|---|---|
+| `id_contato` | INT AUTO_INCREMENT (PK) |
+| `login_usuario` | VARCHAR(50) |
+| `nome` | VARCHAR(100) |
+| `telefone` | VARCHAR(20) |
+| `email` | VARCHAR(100) |
+| `aniversario` | DATE |
+| `observacao` | VARCHAR(255) |
+| `favorito` | BOOLEAN |
+| `categoria` | ENUM |
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| `id_contato` | INT | Identificador do contato (chave primária) |
-| `login_usuario` | VARCHAR(50) | Identifica o proprietário do contato |
-| `nome` | VARCHAR(100) | Nome do contato |
-| `telefone` | VARCHAR(20) | Telefone |
-| `email` | VARCHAR(100) | E-mail (opcional) |
-| `aniversario` | DATE | Data de aniversário (opcional) |
-| `observacao` | VARCHAR(255) | Observações (opcional) |
-| `favorito` | BOOLEAN | Indica se o contato é favorito |
-| `categoria` | ENUM | Categoria do contato (opcional) |
-
-**Categorias disponíveis:** Trabalho, Família e Amigos.
+**Categorias:** Trabalho, Família e Amigos.
 
 ## 🔐 Regras do banco
 
-- Cada contato pertence a um usuário, identificado pelo campo `login_usuario`.
+- Cada contato pertence a um usuário, identificado por `login_usuario`.
 - Cada usuário possui sua própria agenda.
-- Os contatos são separados pelo login do proprietário.
-- O banco da Agenda não armazena senhas nem cadastra usuários.
-- O campo `id_contato` é gerado automaticamente.
-- Os campos de e-mail, aniversário, observação e categoria são opcionais.
-- O campo `favorito` possui valor padrão `FALSE`.
+- O banco da Agenda não armazena usuários nem senhas.
+- O identificador do contato é gerado automaticamente.
+- E-mail, aniversário, observação e categoria são opcionais.
+- Favoritos começam com o valor `FALSE`.
 
-## 🔎 Consultas SQL
+## ☕ Integração Java + MySQL
 
-Foram realizadas diversas consultas para testar o funcionamento do banco de dados.
+A conexão é realizada por JDBC, utilizando o MySQL Connector/J.
 
-Entre as principais estão:
+- `ConexaoMySQL.java`: estabelece a conexão com o banco.
+- `ContatoDAO.java`: realiza cadastro, consulta, edição, exclusão e alteração de favoritos.
+- `TesteConexao.java` e classes de teste do DAO: verificam o funcionamento da conexão e das operações.
 
-- Listar contatos de um usuário.
-- Ordenar contatos por aniversário.
-- Exibir contatos favoritos primeiro.
-
-Os comandos e resultados estão disponíveis na pasta `scripts/consultas/`.
-
-## 🧪 Testes realizados
-
-Foram realizados testes das operações CRUD:
-
-| Operação | Descrição |
-|---|---|
-| CREATE | Cadastro de contatos |
-| READ | Consulta de contatos |
-| UPDATE | Atualização de informações e favoritos |
-| DELETE | Exclusão de contatos |
-
-Os comandos utilizados estão documentados em `scripts/testes/testar_crud.sql`.
+As credenciais ficam no arquivo local `config.properties`, ignorado pelo Git.
 
 ## ⚙️ Tecnologias
 
 - MySQL 8.0
 - SQL
+- Java
+- JDBC
+- MySQL Connector/J
 
 <br/>
 
