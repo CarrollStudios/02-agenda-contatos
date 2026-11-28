@@ -23,3 +23,9 @@
 hs_err_pid*
 replay_pid*
 /bin/
+
+# Configurações locais e senhas
+config.properties
+
+# Permitir a biblioteca MySQL do projeto
+!lib/mysql-connector-j-26.10.0.jar
